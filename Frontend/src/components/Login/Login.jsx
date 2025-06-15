@@ -1,15 +1,17 @@
 import React from "react";
 import style from "./Login.module.css";
 import { useState } from "react";
+import axios from 'axios'
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(username,password);
-    
+    const response= await axios.post('http://localhost:5600/login',{username,password});
+    console.log(response.data);
     setUsername("");
     setPassword("");
 };

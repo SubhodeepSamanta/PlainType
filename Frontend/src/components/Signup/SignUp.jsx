@@ -1,15 +1,17 @@
 import React from 'react'
 import style from './SignUp.module.css'
 import { useState } from 'react';
+import axios from 'axios';
 
 const SignUp = () => {
     const [username, setUsername] = useState("");
       const [password, setPassword] = useState("");
       
-      const handleSubmit = (e) => {
+      const handleSubmit = async(e) => {
         e.preventDefault();
         console.log(username,password);
-        
+        const response= await axios.post('http://localhost:5600/register',{username,password});
+        console.log(response.data);
         setUsername("");
         setPassword("");
     };
