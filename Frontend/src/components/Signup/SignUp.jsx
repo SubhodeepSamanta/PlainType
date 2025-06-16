@@ -2,16 +2,22 @@ import React from 'react'
 import style from './SignUp.module.css'
 import { useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 const SignUp = () => {
     const [username, setUsername] = useState("");
-      const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate=useNavigate();
       
       const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(username,password);
-        const response= await axios.post('http://localhost:5600/register',{username,password});
+        try{
+        const response= await axios.post('http://localhost:5600/register',{username,password},{withCredentials: true});
         console.log(response.data);
+        navigate('/');
+        }catch(err){
+          console.log(err.message);
+        }
         setUsername("");
         setPassword("");
     };
@@ -19,7 +25,7 @@ const SignUp = () => {
     <form action="">
     <div className={style["signup-container"]}>
         <h1>SignUp</h1>
-        <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} name='email' placeholder='Enter your email'/>
+        <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} name='username' placeholder='Enter your username'/>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name='password' placeholder='Enter your password'/>
         <button type='submit' onClick={(e)=>handleSubmit(e)}>SignUp</button>
     </div>
