@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MainCategory from "../components/MainCategory";
+import FeaturedPosts from "../components/FeaturedPosts";
+import RecentPosts from "../components/RecentPosts";
 
 const HomePage = () => {
   return (
@@ -60,6 +62,8 @@ const HomePage = () => {
         </Link>
       </div>
       <MainCategory/>
+      <FeaturedPosts/>
+      <RecentPosts/>
     </div>
   );
 };
