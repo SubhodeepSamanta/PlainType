@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Img from './Img';
 
 const Navbar = () => {
-    const [open,setOpen]= useState(true);
+    const [open,setOpen]= useState(false);
   return (
     <div className=' py-2 flex items-center justify-between mb-4'>
         <Link className="left gap-2 flex items-center justify-between">
@@ -17,7 +17,7 @@ const Navbar = () => {
             </button>
         </div>
 
-        <div className={`list md:hidden absolute flex flex-col bg-[#e6e6ff] w-full h-screen top-0 ${open? "right-0 bottom-0":"-right-[100%]"} transition-all ease-in-out duration-1000 items-center justify-center gap-8 text-xl`}>
+        <div className={`list md:hidden fixed flex flex-col bg-[#e6e6ff] w-full h-screen top-0 ${open? "right-0 bottom-0":"-right-[100%]"} transition-all ease-in-out duration-1000 items-center justify-center gap-8 text-xl`}>
             <Link to="/">Home</Link>
             <Link to="/">Trending</Link>
             <Link to="/">Most Popular</Link>
