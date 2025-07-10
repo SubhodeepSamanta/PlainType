@@ -2,7 +2,7 @@ import React from 'react'
 
 const Search = () => {
   return (
-    <div className='flex bg-white rounded-full py-2 px-2 w-full items-center gap-2 mt-4'>
+    <div className='flex bg-white rounded-full py-2 px-2 w-full items-center gap-2 mt-2'>
         <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

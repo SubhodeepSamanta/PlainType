@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 
 const PostList = () => {
   return (
-    <div className='PostList mt-4 md:mt-8'>
-         <h1 className='text-2xl text-medium text-gray-500 mb-4 md:mt-35 lg:mt-4'>Recent Posts</h1>
+    <div className='PostList'>
          <div className="post lg:flex mb-4">
          <Img src='/postImg.jpeg' alt='post' className='w-[100%] rounded-2xl mb-4 block md:hidden lg:block lg:w-4/11' width={734}/>
          <div className="details lg:flex lg:flex-col ml-4">
