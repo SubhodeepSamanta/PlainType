@@ -61,7 +61,6 @@ const SinglePostPage = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
         </p>
           </div>
-          <Comments/>
         </div>
         <div className="side w-full md:w-250 md:sticky top-8 h-fit">
           <p className='font-medium mb-2'>Author</p>
@@ -90,6 +89,7 @@ const SinglePostPage = () => {
           <Search/>
         </div>
       </div>
+        <Comments/>
     </div>
   )
 }

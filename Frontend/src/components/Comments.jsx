@@ -17,38 +17,6 @@ const Comments = () => {
             </div>
             <p className='text-sm mt-2 font-normal'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi sapiente beatae officiis perferendis quia delectus voluptatum nobis, dolore praesentium ipsa laborum suscipit eveniet atque sequi rerum, necessitatibus error? Vitae laudantium, sapiente quae commodi rerum deserunt delectus eum cum illo repudiandae.</p>
         </div>
-        <div className="comment mt-4 bg-white p-4 rounded-lg">
-            <div className="details flex items-center gap-2">
-                <Img src='/userImg.jpeg' className='rounded-full' width={30} height={30} />
-                <span className='text-sm text-gray-700'>John Doe</span>
-                <span className='text-gray-500 text-xs'>2 days ago</span>
-            </div>
-            <p className='text-sm mt-2 font-normal'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi sapiente beatae officiis perferendis quia delectus voluptatum nobis, dolore praesentium ipsa laborum suscipit eveniet atque sequi rerum, necessitatibus error? Vitae laudantium, sapiente quae commodi rerum deserunt delectus eum cum illo repudiandae.</p>
-        </div>
-        <div className="comment mt-4 bg-white p-4 rounded-lg">
-            <div className="details flex items-center gap-2">
-                <Img src='/userImg.jpeg' className='rounded-full' width={30} height={30} />
-                <span className='text-sm text-gray-700'>John Doe</span>
-                <span className='text-gray-500 text-xs'>2 days ago</span>
-            </div>
-            <p className='text-sm mt-2 font-normal'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi sapiente beatae officiis perferendis quia delectus voluptatum nobis, dolore praesentium ipsa laborum suscipit eveniet atque sequi rerum, necessitatibus error? Vitae laudantium, sapiente quae commodi rerum deserunt delectus eum cum illo repudiandae.</p>
-        </div>
-        <div className="comment mt-4 bg-white p-4 rounded-lg">
-            <div className="details flex items-center gap-2">
-                <Img src='/userImg.jpeg' className='rounded-full' width={30} height={30} />
-                <span className='text-sm text-gray-700'>John Doe</span>
-                <span className='text-gray-500 text-xs'>2 days ago</span>
-            </div>
-            <p className='text-sm mt-2 font-normal'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi sapiente beatae officiis perferendis quia delectus voluptatum nobis, dolore praesentium ipsa laborum suscipit eveniet atque sequi rerum, necessitatibus error? Vitae laudantium, sapiente quae commodi rerum deserunt delectus eum cum illo repudiandae.</p>
-        </div>
-        <div className="comment mt-4 bg-white p-4 rounded-lg">
-            <div className="details flex items-center gap-2">
-                <Img src='/userImg.jpeg' className='rounded-full' width={30} height={30} />
-                <span className='text-sm text-gray-700'>John Doe</span>
-                <span className='text-gray-500 text-xs'>2 days ago</span>
-            </div>
-            <p className='text-sm mt-2 font-normal'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi sapiente beatae officiis perferendis quia delectus voluptatum nobis, dolore praesentium ipsa laborum suscipit eveniet atque sequi rerum, necessitatibus error? Vitae laudantium, sapiente quae commodi rerum deserunt delectus eum cum illo repudiandae.</p>
-        </div>
     </div>
   )
 }
