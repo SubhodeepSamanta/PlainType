@@ -10,3 +10,29 @@ body{
 .animatedButton{
   animation-duration: 5s;
 }
+
+.ql-toolbar{
+  border:none !important;
+}
+
+.ql-container{
+  border: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e6e6ff; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9999e775;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9999e7;
+  cursor: pointer;
+}
