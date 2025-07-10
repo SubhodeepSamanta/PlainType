@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import MainCategory from "../components/MainCategory";
 import FeaturedPosts from "../components/FeaturedPosts";
-import RecentPosts from "../components/RecentPosts";
+import PostList from "../components/PostList";
 
 const HomePage = () => {
   return (
@@ -63,7 +63,7 @@ const HomePage = () => {
       </div>
       <MainCategory/>
       <FeaturedPosts/>
-      <RecentPosts/>
+      <PostList/>
     </div>
   );
 };

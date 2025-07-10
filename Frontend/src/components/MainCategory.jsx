@@ -25,7 +25,7 @@ const MainCategory = () => {
         <circle cx="10.5" cy="10.5" r="7.5" />
         <line x1="16.5" y1="16.5" x2="22" y2="22" />
       </svg>
-      <input type="text" className='h-fit outline-0' placeholder='Search a post...'/>
+      <input type="text" className='h-fit outline-0 w-full' placeholder='Search a post...'/>
         </div>
     </div>
   )

@@ -11,6 +11,14 @@ export default function Img({src,width,height,className,alt}) {
       loading="lazy"
       alt={alt}
       className={className}
+      transformation={
+        [
+          {
+            width:width,
+            height:height
+          }
+        ]
+      }
     />
   )
 }
