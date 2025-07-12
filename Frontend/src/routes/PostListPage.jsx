@@ -1,9 +1,28 @@
 import React, { useState } from 'react'
 import PostList from '../components/PostList'
 import SideMenu from '../components/SideMenu'
+import { useQuery } from '@tanstack/react-query';
+import { apiRequest } from '../utilities/apiRequest';
 
 const PostListPage = () => {
   const [open, setOpen]= useState(false);
+  const getPosts= async () => {
+    console.log('here');
+    const response= await apiRequest.get('/posts');
+    return response.data;
+  }
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: ()=> getPosts(),
+  })
+
+  if (isPending) return 'Loading...';
+
+  if (error) return 'An error has occurred: ' + error.message;
+
+  if (data) console.log(data);
+
   return (
     <div className='postlistpage'>
       <h1 className='text-2xl text-gray-700 mb-4'>Development Blog</h1>

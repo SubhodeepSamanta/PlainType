@@ -23,7 +23,7 @@ const postModel= mongoose.Schema({
     },
     category:{
         type:String,
-        default:"General"
+        default:"general"
     },
     content:{
         type:String,

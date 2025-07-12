@@ -20,12 +20,21 @@ export const createPost= async(req,res)=>{
     }
 
     const user= await User.findOne({clerkUserId: userId});
-    console.log(user);
     if(!user){
         return res.status(401).send('not a valid user');
     }
 
-    const newPost = new Post({user:user._id ,...req.body});
+    let baseSlug= req.body.title.replace(/ /g,"-").toLowerCase();
+    let slug= baseSlug;
+    let existingPost= await Post.findOne({slug});
+    let counter= 2;
+
+    while(existingPost){
+        slug= `${baseSlug}-${counter}`;
+        existingPost= await Post.findOne({slug});
+        counter++;
+    }
+    const newPost = new Post({user:user._id, slug, ...req.body});
     const post= await newPost.save();
     res.status(200).send(post);
 }

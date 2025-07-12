@@ -5,9 +5,18 @@ import postRouter from './routes/post.route.js'
 import commentRouter from './routes/comment.route.js'
 import webhookRouter from './routes/webhook.route.js';
 import {clerkMiddleware} from '@clerk/express'
+import cors from 'cors'
+
+
 const app=express();
 const PORT=process.env.PORT;
 connectDB();
+
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true
+}))
+
 app.use(clerkMiddleware());
 app.use('/webhooks',webhookRouter);
 app.use(express.json());
