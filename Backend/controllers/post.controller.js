@@ -1,4 +1,5 @@
 import Post from "../models/post.model.js"
+import User from "../models/user.model.js";
 
 
 export const getPosts= async(req,res)=>{
@@ -13,13 +14,37 @@ export const getPost= async(req,res)=>{
 }
 
 export const createPost= async(req,res)=>{
-    const newPost = new Post(req.body);
+    const {userId}= req.auth();
+    if(!userId){
+        return res.status(401).send('not authenticated');
+    }
+
+    const user= await User.findOne({clerkUserId: userId});
+    console.log(user);
+    if(!user){
+        return res.status(401).send('not a valid user');
+    }
+
+    const newPost = new Post({user:user._id ,...req.body});
     const post= await newPost.save();
     res.status(200).send(post);
 }
 
 export const deletePost= async(req,res)=>{
+    const {userId}= req.auth();
+    if(!userId){
+        return res.status(401).send('not authenticated');
+    }
+
+    const user= await User.findOne({clerkUserId: userId});
+    if(!user){
+        return res.status(401).send('not a valid user');
+    }
+
     const _id= req.params.id;
-    await Post.findOneAndDelete({_id});
+    const deletedPost= await Post.findOneAndDelete({_id,user: user._id});
+    if(!deletedPost){
+        res.status(403).send('You can delete only your post');
+    }
     res.status(200).send('post deleted successfully');
 }
