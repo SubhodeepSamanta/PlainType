@@ -1,74 +1,64 @@
 import React from 'react'
 import Img from '../components/Img'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import PostMenuInteractions from '../components/PostMenuInteractions'
 import Search from '../components/Search'
 import Comments from '../components/Comments'
+import { useQuery } from '@tanstack/react-query'
+import { apiRequest } from '../utilities/apiRequest'
+import { format } from 'timeago.js'
+import ReactQuill from 'react-quill-new'
+import 'react-quill-new/dist/quill.snow.css';
 
 const SinglePostPage = () => {
+
+  const {slug}= useParams();
+
+  const getPost=async()=>{
+    const response= await apiRequest.get(`/posts/${slug}`);
+    return response.data;
+  }
+  
+  const { isPending, error, data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: getPost
+  })
+
+  if (isPending) return 'Loading...'
+
+  if (error) return 'An error has occurred: ' + error.message
+  console.log(data);
   return (
     <div>
       <div className="details flex flex-col md:flex-row mt-8 gap-4">
         <div className="text md:w-4/5">
-        <h1 className='text-xl font-bold md:text-2xl lg:text-3xl xl:text-4xl mb-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum illo a cupiditate.</h1>
+        <h1 className='text-xl font-bold md:text-2xl lg:text-3xl xl:text-4xl mb-4'>{data.title}</h1>
         <span className='text-gray-500 flex gap-1 text-sm mt-2 mb-2 flex-wrap md:mt-4 lg:mt-2'>
                 Written By
-                <span className='text-blue-500'>John Doe</span>
+                <span className='text-blue-500'>{data.user.username}</span>
                 on
-                <span className='text-blue-500 block sm:inline'>Web Design</span>
-                2 days ago
+                <span className='text-blue-500 block sm:inline'>{data.category}</span>
+                {format(data.createdAt)}
         </span>
-        <p className='my-4 text-gray-800'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse eum voluptatibus dolores deleniti magni recusandae expedita cumque quod sapiente explicabo nisi officiis facilis, nostrum ad impedit deserunt consectetur cupiditate numquam!</p>
+        <p className='my-4 text-gray-800'>{data.desc}</p>
         </div>
-        <div className="image w-[100%] md:w-2/5 rounded-xl">
-        <Img src='/featured1.jpeg' alt='cover image' className='h-full w-full object-cover rounded-xl'/>
+        <div className="image w-[100%] h-[16rem] md:w-2/5 rounded-xl">
+        <Img src={data?.img?.substring('/PlainType'.length)} alt='cover image' className='h-full w-full object-cover rounded-xl'/>
         </div>
       </div>
       <div className="content text-justify mt-8 flex flex-col md:flex-row gap-4">
-        <div className="text">
-          <div className="text-content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum dolorem ratione est minus odit corporis saepe, quo aperiam fugiat mollitia officiis ad incidunt aliquam porro perferendis rerum a alias enim? Fugit facere laborum cum commodi quisquam asperiores neque delectus dolores cupiditate tenetur dignissimos dolor praesentium soluta atque earum, nam tempora repudiandae, culpa ducimus accusantium! Animi beatae quisquam quidem sint ullam ipsam eius fuga modi sunt aliquam. Earum voluptate neque porro aliquam minima iure tempora quaerat, dolorem assumenda dicta beatae.
-        </p>
+        <div className="text  w-[100%]">
+          <div className="text-content w-[100%]">
+            <ReactQuill value={data.content} readOnly={true} modules={{toolbar:false}} />
           </div>
         </div>
-        <div className="side w-full md:w-250 md:sticky top-8 h-fit">
+        <div className="side w-full md:w-70 md:sticky top-8 right-0 h-fit">
           <p className='font-medium mb-2'>Author</p>
           <div className="author flex items-center gap-4 mb-2">
             <div className="image rounded-full object-cover">
-            <Img src='/userImg.jpeg' alt='author' className='rounded-full object-cover' width={40} height={40} />
+            <Img src={data.user.img} alt='author' className='rounded-full object-cover' width={40} height={40} />
             </div>
-            <p className='text-blue-500'>John Doe</p>
+            <p className='text-blue-500'>{data.user.username}</p>
           </div>
           <div className="description text-gray-600 text-left text-sm mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At minus quam eligendi?</div>
           <Link to='/'><Img src='/facebook.svg' height={25} width={25} className='inline' /></Link>
