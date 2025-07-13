@@ -36,3 +36,10 @@ body{
   background: #9999e7;
   cursor: pointer;
 }
+
+.ql-editor img, .ql-editor iframe{
+  height: 10rem;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
