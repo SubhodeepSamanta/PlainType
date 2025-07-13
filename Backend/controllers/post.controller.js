@@ -1,10 +1,17 @@
+import ImageKit from "imagekit";
 import Post from "../models/post.model.js"
 import User from "../models/user.model.js";
 
 
 export const getPosts= async(req,res)=>{
-    const posts= await Post.find();
-    res.status(200).send(posts);
+    const page= parseInt(req.query.page) || 1;
+    const limit= parseInt(req.query.limit) || 2;
+
+    const posts= await Post.find().limit(limit).skip((page-1)*limit).sort({createdAt: -1}).populate("user","username") ;
+    const totalPosts= await Post.countDocuments();
+    const hasMore= limit*page < totalPosts;
+
+    res.status(200).send({posts, hasMore});
 }
 
 export const getPost= async(req,res)=>{
@@ -56,4 +63,20 @@ export const deletePost= async(req,res)=>{
         res.status(403).send('You can delete only your post');
     }
     res.status(200).send('post deleted successfully');
+}
+
+const imagekit = new ImageKit({
+    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY
+});
+
+export const uploadAuth= async(req,res)=>{
+    try{
+        const result = imagekit.getAuthenticationParameters();
+        res.send(result);
+    } catch (error) {
+        console.error("Error generating ImageKit auth parameters:", error);
+        res.status(500).json({ message: "Failed to generate auth parameters" });
+    }
 }

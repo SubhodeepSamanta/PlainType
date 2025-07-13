@@ -36,7 +36,7 @@ const Write = () => {
     e.preventDefault();
     const formdata= new FormData(e.target);
     const data={
-       cover: cover.filePath || "",
+       img: cover.filePath || "",
        title: formdata.get('title'),
        desc: formdata.get('desc'),
        category: formdata.get('category'),

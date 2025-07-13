@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import MainCategory from "../components/MainCategory";
 import FeaturedPosts from "../components/FeaturedPosts";
-import PostList from "../components/PostList";
+import PostListPage from "./PostListPage";
 
 const HomePage = () => {
   return (
@@ -64,7 +64,7 @@ const HomePage = () => {
       <MainCategory/>
       <FeaturedPosts/>
       <h1 className='text-2xl text-medium text-gray-500 mb-4 md:mt-35 lg:mt-8 mt-4'>Recent Posts</h1>
-      <PostList/>
+      <PostListPage/>
     </div>
   );
 };

@@ -12,14 +12,23 @@ const app=express();
 const PORT=process.env.PORT;
 connectDB();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", 
+    "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true
 }))
 
+
 app.use(clerkMiddleware());
 app.use('/webhooks',webhookRouter);
 app.use(express.json());
+
 
 app.use('/users',userRouter);
 app.use('/posts',postRouter);
