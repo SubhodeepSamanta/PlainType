@@ -51,11 +51,15 @@ const Write = () => {
   useEffect(()=>{
     video && setValue(prev=>prev+`<p><iframe class='ql-video' src='${video.url}'/></p>`)
   },[video]);
-
+  
+  
   const {isLoaded, isSignedIn}= useUser();
+  
+  useEffect(()=>{
+    if(isLoaded && !isSignedIn) navigate('/login');
+  },[navigate,isLoaded,isSignedIn])
 
   if(!isLoaded) return 'Loading...';
-  if(isLoaded && !isSignedIn) return 'Login';
 
 
   return (

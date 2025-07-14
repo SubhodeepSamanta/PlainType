@@ -27,7 +27,7 @@ const SinglePostPage = () => {
   if (isPending) return 'Loading...'
 
   if (error) return 'An error has occurred: ' + error.message
-  console.log(data);
+
   return (
     <div>
       <div className="details flex flex-col md:flex-row mt-8 gap-4">
@@ -79,7 +79,7 @@ const SinglePostPage = () => {
           <Search/>
         </div>
       </div>
-        <Comments/>
+        <Comments postId={data._id} />
     </div>
   )
 }

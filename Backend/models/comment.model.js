@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const postModel= mongoose.Schema({
+const commentModel= mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"User",
