@@ -28,6 +28,8 @@ const SinglePostPage = () => {
 
   if (error) return 'An error has occurred: ' + error.message
 
+  if(!data) return "No Post Found"
+
   return (
     <div>
       <div className="details flex flex-col md:flex-row mt-8 gap-4">
@@ -35,7 +37,7 @@ const SinglePostPage = () => {
         <h1 className='text-xl font-bold md:text-2xl lg:text-3xl xl:text-4xl mb-4'>{data.title}</h1>
         <span className='text-gray-500 flex gap-1 text-sm mt-2 mb-2 flex-wrap md:mt-4 lg:mt-2'>
                 Written By
-                <span className='text-blue-500'>{data.user.username}</span>
+                <span className='text-blue-500'>{data?.user?.username}</span>
                 on
                 <span className='text-blue-500 block sm:inline'>{data.category}</span>
                 {format(data.createdAt)}
@@ -56,16 +58,16 @@ const SinglePostPage = () => {
           <p className='font-medium mb-2'>Author</p>
           <div className="author flex items-center gap-4 mb-2">
             <div className="image rounded-full object-cover">
-            <Img src={data.user.img} alt='author' className='rounded-full object-cover' width={40} height={40} />
+            <Img src={data?.user?.img} alt='author' className='rounded-full object-cover' width={40} height={40} />
             </div>
-            <p className='text-blue-500'>{data.user.username}</p>
+            <p className='text-blue-500'>{data?.user?.username}</p>
           </div>
           <div className="description text-gray-600 text-left text-sm mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At minus quam eligendi?</div>
           <Link to='/'><Img src='/facebook.svg' height={25} width={25} className='inline' /></Link>
           <Link to='/'><Img src='/instagram.svg' height={25} width={25} className='inline' /></Link>
           <div className="actions mt-4">
             <p className='font-medium mb-2'>Actions</p>
-            <PostMenuInteractions/>
+            <PostMenuInteractions post={data}/>
           </div>
           <div className="categories mt-4 flex flex-col gap-2">
             <p className='font-medium mb-2'>Categories</p>
