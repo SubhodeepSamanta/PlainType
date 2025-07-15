@@ -18,6 +18,7 @@ export const getPosts= async(req,res)=>{
     if(cat){
         query.category= cat;
     }
+
     
     if(searchQuery){
         query.title= {$regex: searchQuery, $options: "i"};

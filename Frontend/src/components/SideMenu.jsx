@@ -9,6 +9,11 @@ const SideMenu = () => {
             setSearchParams({...Object.fromEntries(searchParams.entries()), sort: e.target.value})
         }
     }
+    const handleCategoryChange= (category)=>{
+        if(searchParams.get("sort")!==category){
+            setSearchParams({...Object.fromEntries(searchParams.entries()), cat: category})
+        }
+    }
   return (
     <div>
         <div className="search mb-4 md:w-50 lg:w-60">
@@ -36,12 +41,12 @@ const SideMenu = () => {
         </div>
         <div className="category flex flex-col gap-2">
             <h1 className='font-medium mt-8'>Categories</h1>
-            <Link to='/' className='underline text-sm text-blue-600'>All</Link>
-            <Link to='/' className='underline text-sm text-blue-600'>Web Design</Link>
-            <Link to='/' className='underline text-sm text-blue-600'>Development</Link>
-            <Link to='/' className='underline text-sm text-blue-600'>Databases</Link>
-            <Link to='/' className='underline text-sm text-blue-600'>Search Engines</Link>
-            <Link to='/' className='underline text-sm text-blue-600'>Marketing</Link>
+            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("general")}>All</span>
+            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("web-design")}>Web Design</span>
+            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("development")}>Development</span>
+            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("databases")}>Databases</span>
+            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("seo")}>Search Engines</span>
+            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("marketing")}>Marketing</span>
         </div>
     </div>
   )
