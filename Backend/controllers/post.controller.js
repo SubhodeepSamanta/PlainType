@@ -18,7 +18,6 @@ export const getPosts= async(req,res)=>{
     if(cat){
         query.category= cat;
     }
-
     
     if(searchQuery){
         query.title= {$regex: searchQuery, $options: "i"};
@@ -52,6 +51,10 @@ export const getPosts= async(req,res)=>{
                 }
                 break;
         }
+    }
+
+    if(featured){
+        query.isFeatured= true;
     }
 
     const posts= await Post.find(query).limit(limit).skip((page-1)*limit).sort(sortObj).populate("user","username") ;
