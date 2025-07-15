@@ -1,72 +1,142 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PostList from "../components/PostList";
 import SideMenu from "../components/SideMenu";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query"; // Changed from useInfiniteQuery
 import { apiRequest } from "../utilities/apiRequest";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const PostListPage = () => {
-  const getPosts = async (pageParam) => {
-    const response = await apiRequest.get("/posts", {
-      params: { page: pageParam, limit: 5 },
-    });
-    return response.data;
-  };
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.error("PostListPage error:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (() => {
+        window.location.reload()
+      }
+      );
+    }
+    return this.props.children;
+  }
+}
+
+const PostListContent = () => {
+
+  const [page, setPage] = useState(1);
+  const [allPosts, setAllPosts] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
   const [open, setOpen] = useState(false);
 
-  const { data, error, fetchNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ["posts"],
-      queryFn: ({ pageParam = 1 }) => getPosts(pageParam),
-      initialPageParam: 1,
-      getNextPageParam: (lastPage, pages) =>
-        lastPage.hasMore ? pages.length + 1 : undefined,
-    });
+  const { data, error, isLoading} = useQuery({
+    queryKey: ["posts", page],
+    queryFn: async () => {
+      try {
+        const response = await apiRequest.get("/posts", {
+          params: { page, limit: 5 },
+        });
+        
+        const data = response.data || {};
+        return {
+          posts: Array.isArray(data.posts) ? data.posts : [],
+          hasMore: typeof data.hasMore === "boolean" ? data.hasMore : false
+        };
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        return { posts: [], hasMore: false };
+      }
+    },
+    staleTime: 60000,
+    refetchOnWindowFocus: false,
+  });
 
+   useEffect(() => {
+    if (data?.posts) {
+      setAllPosts(prev => {
+        const existingIds = new Set(prev.map(post => post._id)); 
+        const newPosts = data.posts.filter(post => !existingIds.has(post._id)); 
+        return [...prev, ...newPosts];
+      });
+      setHasMore(data.hasMore);
+    }
+  }, [data]);
 
-  if (error) return "An error has occurred: " + error.message;
+  const fetchNextPage = () => {
+    if (hasMore) {
+      setPage(prev => prev + 1);
+    }
+  };
 
-  const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
-  return (
-    <div className="postlistpage">
-      <h1 className="text-2xl text-gray-700 mb-4">Development Blog</h1>
-      <button
-        className="bg-blue-500 text-white block md:hidden py-1 px-4 rounded-full mb-4"
-        onClick={() => setOpen((prev) => !prev)}
-      >
-        Filter
-      </button>
-      <div
-        className={`content flex gap-8 ${
-          open ? "flex-col-reverse md:flex-row" : ""
-        }`}
-      >
-        <div className="posts">
+  if (isLoading && page === 1) {
+    return <div className="p-4">Loading posts...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4">An error has occurred: {error.message}</div>;
+  }
+
+  // Only show InfiniteScroll when we actually have initial posts
+return (
+  <div className="postlistpage">
+    <h1 className="text-2xl text-gray-700 mb-4">Development Blog</h1>
+    <button
+      className="bg-blue-500 text-white block md:hidden py-1 px-4 rounded-full mb-4"
+      onClick={() => setOpen((prev) => !prev)}
+    >
+      Filter
+    </button>
+    <div
+      className={`content flex gap-8 ${
+        open ? "flex-col-reverse md:flex-row" : ""
+      }`}
+    >
+      <div className="posts">
+        {allPosts.length > 0 ? (
           <InfiniteScroll
             dataLength={allPosts.length}
             next={fetchNextPage}
-            hasMore={!!hasNextPage}
-            loader={<h4>Loading...</h4>}
+            hasMore={hasMore}
+            loader={<h4>Loading more posts...</h4>}
             endMessage={
               <p>
                 <b>All Posts loaded!</b>
               </p>
             }
           >
-            {allPosts.map((post) => (
-              <PostList key={post._id} post={post} />
+            {allPosts.map((post, index) => (
+              <PostList key={`${post._id || 'post'}-${index}`} post={post} />
             ))}
           </InfiniteScroll>
-        </div>
-        <div
-          className={`sidemenu ${
-            open ? "block" : "hidden"
-          } md:flex flex-col md:`}
-        >
-          <SideMenu />
-        </div>
+        ) : (
+          isLoading ? <div>Loading posts...</div> : <div>No posts found</div>
+        )}
+      </div>
+      <div
+        className={`sidemenu ${
+          open ? "block" : "hidden"
+        } md:flex flex-col md:`}
+      >
+        <SideMenu />
       </div>
     </div>
+  </div>
+);
+};
+
+const PostListPage = () => {
+  return (
+    <ErrorBoundary>
+      <PostListContent />
+    </ErrorBoundary>
   );
 };
 

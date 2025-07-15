@@ -10,7 +10,7 @@ const PostMenuInteractions = ({post}) => {
   const getSavedPosts=async()=>{
     const token= await getToken();
     const response= await apiRequest.get(`/users/saved`,{
-      header:{
+      headers:{
         Authorization:`Bearer ${token}`
       }
     });
@@ -75,7 +75,7 @@ const PostMenuInteractions = ({post}) => {
 
   return (
     <div>
-        <div className="save flex gap-2 items-center cursor-pointer" onClick={()=> savePostMutation.mutate()}>
+        <div className="save flex gap-2 mb-1 items-center cursor-pointer" onClick={()=> savePostMutation.mutate()}>
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 48 48"
@@ -102,7 +102,7 @@ const PostMenuInteractions = ({post}) => {
         </div>
          {isAdmin && (
         <div
-          className="flex items-center gap-2 py-4 text-sm cursor-pointer"
+          className="flex items-center gap-2 py-2 text-sm cursor-pointer"
           onClick={()=>featureMutation.mutate()}
         >
           <svg
@@ -133,7 +133,7 @@ const PostMenuInteractions = ({post}) => {
         </div>
       )}
         {post?.user?.username === user?.username || isAdmin && 
-        <div className="delete flex gap-2 cursor-pointer" onClick={()=> deletePostMutation.mutate()}>
+        <div className="delete flex mt-1 gap-2 cursor-pointer" onClick={()=> deletePostMutation.mutate()}>
              <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 50 50"

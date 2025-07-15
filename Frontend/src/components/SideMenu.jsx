@@ -6,7 +6,7 @@ const SideMenu = () => {
   return (
     <div>
         <div className="search mb-4 md:w-50 lg:w-60">
-        <h1 className='font-medium'>Search</h1>
+        <h1 className='font-medium mb-2'>Search</h1>
         <Search/>
         </div>
         <div className="filters flex flex-col gap-2 text-sm mt-8">

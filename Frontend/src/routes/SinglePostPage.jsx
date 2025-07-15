@@ -45,8 +45,10 @@ const SinglePostPage = () => {
         <p className='my-4 text-gray-800'>{data.desc}</p>
         </div>
         <div className="image w-[100%] h-[16rem] md:w-2/5 rounded-xl">
-        <Img src={data?.img?.substring('/PlainType'.length)} alt='cover image' className='h-full w-full object-cover rounded-xl'/>
-        </div>
+        {data.img && 
+      <Img src={data?.img?.substring('/PlainType'.length)} alt='cover image' className='h-full w-full object-cover rounded-xl'/>
+        }  
+      </div>
       </div>
       <div className="content text-justify mt-8 flex flex-col md:flex-row gap-4">
         <div className="text  w-[100%]">
@@ -69,7 +71,7 @@ const SinglePostPage = () => {
             <p className='font-medium mb-2'>Actions</p>
             <PostMenuInteractions post={data}/>
           </div>
-          <div className="categories mt-4 flex flex-col gap-2">
+          <div className="categories mt-4 flex flex-col gap-2 mb-2">
             <p className='font-medium mb-2'>Categories</p>
             <Link to='/' className='underline text-sm text-blue-600'>All</Link>
             <Link to='/' className='underline text-sm text-blue-600'>Web Design</Link>

@@ -47,5 +47,4 @@ export const deleteComment= async(req,res)=>{
         user: user._id     
     })
     if(!deletedComment) return res.status(403).send('you can delete only your comment');
-    res.status(200).send('comment deleted');
 }
