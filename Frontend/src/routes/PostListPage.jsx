@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PostList from "../components/PostList";
 import SideMenu from "../components/SideMenu";
-import { useQuery } from "@tanstack/react-query"; // Changed from useInfiniteQuery
+import { useQuery } from "@tanstack/react-query"; 
 import { apiRequest } from "../utilities/apiRequest";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useSearchParams } from "react-router-dom";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -31,18 +32,24 @@ class ErrorBoundary extends React.Component {
 }
 
 const PostListContent = () => {
-
+  const [searchParams]= useSearchParams();
   const [page, setPage] = useState(1);
   const [allPosts, setAllPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [open, setOpen] = useState(false);
 
+  const searchParamsObj= Object.fromEntries([...searchParams]);
+  const searchParamsString= searchParams.toString()
+  useEffect(()=>{
+    setPage(1);
+    setAllPosts([]);
+  },[searchParamsString])
   const { data, error, isLoading} = useQuery({
-    queryKey: ["posts", page],
+    queryKey: ["posts", page, searchParams.toString(), searchParamsObj],
     queryFn: async () => {
       try {
         const response = await apiRequest.get("/posts", {
-          params: { page, limit: 5 },
+          params: { page, limit: 5, ...searchParamsObj },
         });
         
         const data = response.data || {};
@@ -84,7 +91,6 @@ const PostListContent = () => {
     return <div className="p-4">An error has occurred: {error.message}</div>;
   }
 
-  // Only show InfiniteScroll when we actually have initial posts
 return (
   <div className="postlistpage">
     <h1 className="text-2xl text-gray-700 mb-4">Development Blog</h1>

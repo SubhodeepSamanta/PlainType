@@ -36,7 +36,7 @@ export const deleteComment= async(req,res)=>{
     const role= req.auth?.sessionClaims?.metadata?.role || "user";
     if(role==='admin'){
         await Comment.findOneAndDelete({_id: id});
-        res.status(200).send('post deleted successfully');
+        return res.status(200).send('post deleted successfully');
     }
 
     if(!userId) return res.status(401).send('not authenticated');

@@ -14,7 +14,7 @@ const PostList = ({post}) => {
          <p className='text-lg font-medium md:text-2xl'>{post.title}</p>
             <span className='text-gray-500 flex gap-1 text-sm mt-1 mb-2 flex-wrap md:mt-4 lg:mt-2'>
                 Written By
-                <span className='text-blue-500'>{post?.user? `${post?.user?.username}` : "Anonymous"}</span>
+                <Link to={`/posts?author=${post?.user?.username || ''}`} className='text-blue-500'>{post?.user? `${post?.user?.username}` : "Anonymous"}</Link>
                 on
                 <span className='text-blue-500 block sm:inline'>{post.category}</span>
                 {format(post.createdAt)}
