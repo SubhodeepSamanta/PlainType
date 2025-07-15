@@ -1,3 +1,4 @@
+import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
 
@@ -26,4 +27,19 @@ export const savePost= async(req,res)=>{
         })
     }
     res.status(200).json(isSaved ? "post unsaved" : "post saved");
+}
+
+export const featurePost= async(req,res)=>{
+    const role= req.auth?.sessionClaims?.metadata?.role || "user";
+    const postId= req.body.postId;
+    if(role==='admin'){
+        const post= await Post.findOne({_id: postId});
+        if(!post.isFeatured){
+            post.isFeatured= true;
+        }else{
+            post.isFeatured= false;
+        }
+        await post.save();
+        res.status(200).send(post);
+    }
 }

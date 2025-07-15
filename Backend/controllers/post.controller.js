@@ -48,6 +48,14 @@ export const createPost= async(req,res)=>{
 
 export const deletePost= async(req,res)=>{
     const {userId}= req.auth();
+    const _id= req.params.id;
+    const role= req.auth?.sessionClaims?.metadata?.role || "user";
+
+    if(role==='admin'){
+        await Post.findOneAndDelete({_id});
+        res.status(200).send('post deleted successfully');
+    }
+
     if(!userId){
         return res.status(401).send('not authenticated');
     }
@@ -57,7 +65,6 @@ export const deletePost= async(req,res)=>{
         return res.status(401).send('not a valid user');
     }
 
-    const _id= req.params.id;
     const deletedPost= await Post.findOneAndDelete({_id,user: user._id});
     if(!deletedPost){
         res.status(403).send('You can delete only your post');

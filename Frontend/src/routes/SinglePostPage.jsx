@@ -20,7 +20,7 @@ const SinglePostPage = () => {
   }
   
   const { isPending, error, data } = useQuery({
-    queryKey: ['repoData'],
+    queryKey: ['posts'],
     queryFn: getPost
   })
 

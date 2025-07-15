@@ -51,13 +51,27 @@ const PostMenuInteractions = ({post}) => {
         queryClient.invalidateQueries({queryKey:['savedPosts']});
       }
     })
+    
+    const featureMutation = useMutation({
+      mutationFn: async () => {
+        const token= await getToken();
+        return apiRequest.patch(`/users/feature`,{postId: post._id},{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        })
+      },
+      onSuccess: async()=>{
+        queryClient.invalidateQueries({queryKey: ['posts']});
+      }
+    })
 
   if (isPending) return 'Loading...'
   
   if (error) return 'An error has occurred: ' + error.message;
+
   const isSaved= savedPosts.some(p=> p === post._id) || false;
-  console.log(isSaved);
-  console.log(savedPosts);
+  const isAdmin= user?.publicMetadata?.role==="admin";
 
   return (
     <div>
@@ -86,8 +100,40 @@ const PostMenuInteractions = ({post}) => {
           <span className='text-sm'>Save this post</span>
           }
         </div>
-        {post?.user?.username === user?.username && 
-        <div className="delete flex gap-2 mt-2 cursor-pointer" onClick={()=> deletePostMutation.mutate()}>
+         {isAdmin && (
+        <div
+          className="flex items-center gap-2 py-4 text-sm cursor-pointer"
+          onClick={()=>featureMutation.mutate()}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            width="20px"
+            height="20px"
+          >
+            <path
+              d="M24 2L29.39 16.26L44 18.18L33 29.24L35.82 44L24 37L12.18 44L15 29.24L4 18.18L18.61 16.26L24 2Z"
+              stroke="black"
+              strokeWidth="2"
+              fill={
+                featureMutation.isPending
+                  ? post.isFeatured
+                    ? "none"
+                    : "black"
+                  : post.isFeatured
+                  ? "black"
+                  : "none"
+              }
+            />
+          </svg>
+          <span>{post.isFeatured? 'Featured' : 'Feature'}</span>
+          {featureMutation.isPending && (
+            <span className="text-xs">(in progress)</span>
+          )}
+        </div>
+      )}
+        {post?.user?.username === user?.username || isAdmin && 
+        <div className="delete flex gap-2 cursor-pointer" onClick={()=> deletePostMutation.mutate()}>
              <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 50 50"

@@ -58,7 +58,10 @@ const Comments = ({postId}) => {
       mutation.mutate(data);
     }
     const {user} = useUser(); 
-  if (isPending) return 'Loading...'
+    const isAdmin= user?.publicMetadata?.role==="admin";
+
+
+    if (isPending) return 'Loading...'
   
   if (error) return 'An error has occurred: ' + error.message
   
@@ -87,7 +90,7 @@ const Comments = ({postId}) => {
               }
                 <span className='text-sm text-gray-700'>{comment.user?.username}</span>
                 <span className='text-gray-500 text-xs'>{format(comment.createdAt)}</span>
-                {user?.username === comment.user?.username && <span className='cursor-pointer' onClick={()=>deleteCommentMutation.mutate(comment._id)} ><Img src='/delete.svg' width={15} /></span> }
+                {((user?.username === comment.user?.username) || isAdmin) && <span className='cursor-pointer' onClick={()=>deleteCommentMutation.mutate(comment._id)} ><Img src='/delete.svg' width={15} /></span> }
             </div>
             <p className='text-sm mt-2 font-normal'>{comment.desc}</p>
         </div>

@@ -8,5 +8,6 @@ router.get("/auth-upload",uploadAuth);
 router.get("/:slug",getPost);
 router.post("/",createPost);
 router.delete("/:id",deletePost);
+router.patch("/feature",deletePost);
 
 export default router;
