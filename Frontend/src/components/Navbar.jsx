@@ -22,6 +22,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
             <Link to="/posts?sort=trending">Trending</Link>
             <Link to="/posts?sort=popular">Most Popular</Link>
+            <Link to="/write">Write</Link>
             <Link to="https://linkedin.com/in/subhodeepsamanta">About</Link>
             <SignedOut>
             <Link to="/login"><button className='px-4 py-2 bg-blue-600 text-white rounded-full cursor-pointer'>Login 👋</button></Link>
@@ -35,7 +36,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
             <Link to="/posts?sort=trending">Trending</Link>
             <Link to="/posts?sort=popular">Most Popular</Link>
-            <Link to="https://linkedin.com/in/subhodeepsamanta" target='_blank'>About</Link>
+            <Link to="/write">Create</Link>
             <SignedOut>
             <Link to="/login"><button className='px-4 py-2 bg-blue-600 text-white rounded-full cursor-pointer'>Login 👋</button></Link>
             </SignedOut>
