@@ -64,14 +64,18 @@ const Comments = ({postId}) => {
     if (isPending) return 'Loading...'
   
   if (error) return 'An error has occurred: ' + error.message
+
   
   return (
     <div className='comments mt-10 mb-4 font-medium text-xl w-full md:w-4/5'>
         <h1 className='text-blue-600 underline'>Comments</h1>
+        {
+          user &&
         <form onSubmit={handleSubmit} className="comment-form flex gap-4 items-baseline mb-8">
         <textarea name="desc" id="comment" placeholder='Write a comment...' className='bg-white p-2 mt-4 w-full rounded-lg text-base resize-none' ></textarea>
         <button className='bg-blue-500 text-white rounded-lg text-base font-normal py-2 px-4 cursor-pointer'>Send</button>
         </form>
+        }
           {mutation.isPending && 
           <div className="comment mt-4 bg-white p-4 rounded-lg">
             <div className="details flex items-center gap-2">

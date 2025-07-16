@@ -9,6 +9,7 @@ import { apiRequest } from '../utilities/apiRequest'
 import { format } from 'timeago.js'
 import ReactQuill from 'react-quill-new'
 import 'react-quill-new/dist/quill.snow.css';
+import { useUser } from '@clerk/clerk-react'
 
 const SinglePostPage = () => {
 
@@ -24,11 +25,14 @@ const SinglePostPage = () => {
     queryFn: getPost
   })
 
+  const {user}= useUser();
+
   if (isPending) return 'Loading...'
 
   if (error) return 'An error has occurred: ' + error.message
 
   if(!data) return "No Post Found"
+
 
   return (
     <div>
@@ -69,7 +73,10 @@ const SinglePostPage = () => {
           <Link to='/'><Img src='/instagram.svg' height={25} width={25} className='inline' /></Link>
           <div className="actions mt-4">
             <p className='font-medium mb-2'>Actions</p>
+            {user ? 
             <PostMenuInteractions post={data}/>
+            : <span>Login to Interact with this post</span>
+            }
           </div>
           <div className="categories mt-4 flex flex-col gap-2 mb-2">
             <p className='font-medium mb-2'>Categories</p>
