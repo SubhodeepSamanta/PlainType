@@ -15,7 +15,6 @@ export const webhookController = async (req, res) => {
     try {
         evt = wh.verify(payload, headers);
         if (evt.type === "user.created") {
-            console.log("userId:", evt.data);
             const newUser= new User({
                 clerkUserId: evt.data.id,
                 username: evt.data.username || evt.data.email_addresses[0].email_address,
