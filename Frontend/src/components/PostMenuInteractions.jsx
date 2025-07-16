@@ -72,6 +72,8 @@ const PostMenuInteractions = ({post}) => {
 
   const isSaved= savedPosts.some(p=> p === post._id) || false;
   const isAdmin= user?.publicMetadata?.role==="admin";
+  console.log(post.user.username)
+  console.log(user.username)
 
   return (
     <div>
@@ -132,8 +134,8 @@ const PostMenuInteractions = ({post}) => {
           )}
         </div>
       )}
-        {post?.user?.username === user?.username || isAdmin && 
-        <div className="delete flex mt-1 gap-2 cursor-pointer" onClick={()=> deletePostMutation.mutate()}>
+        {(post?.user?.username === user?.username || isAdmin) && 
+        <div className="delete flex mt-4 gap-2 cursor-pointer" onClick={()=> deletePostMutation.mutate()}>
              <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 50 50"
