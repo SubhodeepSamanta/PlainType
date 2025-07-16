@@ -17,11 +17,10 @@ const HomePage = () => {
       <div className="introduction relative flex items-center gap-8">
         <div className="left flex-1">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Where Words and Code Stay Simple.
           </h1>
           <p className="mt-6 text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A,
-            dignissimos ea.
+            PlainType is a space where clarity leads — blending thoughtful writing, clean design, and modern development into simple, powerful content for creators, coders, and curious minds.
           </p>
         </div>
         <Link to="write" className="hidden md:block relative flex-shrink-0">

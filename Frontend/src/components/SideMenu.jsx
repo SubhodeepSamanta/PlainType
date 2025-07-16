@@ -41,7 +41,7 @@ const SideMenu = () => {
         </div>
         <div className="category flex flex-col gap-2">
             <h1 className='font-medium mt-8'>Categories</h1>
-            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("general")}>All</span>
+            <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("general")}>General</span>
             <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("web-design")}>Web Design</span>
             <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("development")}>Development</span>
             <span  className='underline text-sm text-blue-600 cursor-pointer' onClick={()=>handleCategoryChange("databases")}>Databases</span>

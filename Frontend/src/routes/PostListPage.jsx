@@ -93,7 +93,7 @@ const PostListContent = () => {
 
 return (
   <div className="postlistpage">
-    <h1 className="text-2xl text-gray-700 mb-4">Development Blog</h1>
+    <h1 className="text-lg text-gray-700 mb-4 ml-2">Here's a calm corner of the internet for words, code, and clarity.</h1>
     <button
       className="bg-blue-500 text-white block md:hidden py-1 px-4 rounded-full mb-4"
       onClick={() => setOpen((prev) => !prev)}

@@ -20,9 +20,9 @@ const Navbar = () => {
 
         <div className={`list md:hidden fixed flex flex-col bg-[#e6e6ff] w-full h-screen top-0 ${open? "right-0 bottom-0":"-right-[100%]"} transition-all ease-in-out duration-1000 items-center justify-center gap-8 text-xl z-100`}>
             <Link to="/">Home</Link>
-            <Link to="/posts">Trending</Link>
-            <Link to="/posts">Most Popular</Link>
-            <Link to="/">About</Link>
+            <Link to="/posts?sort=trending">Trending</Link>
+            <Link to="/posts?sort=popular">Most Popular</Link>
+            <Link to="https://linkedin.com/in/subhodeepsamanta">About</Link>
             <SignedOut>
             <Link to="/login"><button className='px-4 py-2 bg-blue-600 text-white rounded-full cursor-pointer'>Login 👋</button></Link>
             </SignedOut>
@@ -33,9 +33,9 @@ const Navbar = () => {
         
         <div className="right md:flex hidden items-center justify-between text-md gap-8">
             <Link to="/">Home</Link>
-            <Link to="/posts">Trending</Link>
-            <Link to="/posts">Most Popular</Link>
-            <Link to="/">About</Link>
+            <Link to="/posts?sort=trending">Trending</Link>
+            <Link to="/posts?sort=popular">Most Popular</Link>
+            <Link to="https://linkedin.com/in/subhodeepsamanta" target='_blank'>About</Link>
             <SignedOut>
             <Link to="/login"><button className='px-4 py-2 bg-blue-600 text-white rounded-full cursor-pointer'>Login 👋</button></Link>
             </SignedOut>

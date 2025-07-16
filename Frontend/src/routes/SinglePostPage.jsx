@@ -68,7 +68,7 @@ const SinglePostPage = () => {
             </div>
             <p className='text-blue-500'>{data?.user?.username}</p>
           </div>
-          <div className="description text-gray-600 text-left text-sm mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At minus quam eligendi?</div>
+          <div className="description text-gray-600 text-left text-sm mb-2">Author for PlainType, the fastest growing blogging website on the planet!</div>
           <Link to='/'><Img src='/facebook.svg' height={25} width={25} className='inline' /></Link>
           <Link to='/'><Img src='/instagram.svg' height={25} width={25} className='inline' /></Link>
           <div className="actions mt-4">

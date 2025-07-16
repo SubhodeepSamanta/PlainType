@@ -43,3 +43,9 @@ body{
   margin: 0 auto;
   border-radius: 0.5rem;
 }
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
