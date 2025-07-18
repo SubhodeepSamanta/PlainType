@@ -37,11 +37,12 @@ const Comments = ({postId}) => {
     const deleteCommentMutation = useMutation({
       mutationFn: async (commentId) => {
         const token= await getToken();
-        return apiRequest.delete(`/comments/${commentId}`,{
+        const response= apiRequest.delete(`/comments/${commentId}`,{
           headers:{
             Authorization: `Bearer ${token}`
           }
         })
+        return response.data;
       },
       onSuccess: async()=>{
         queryClient.invalidateQueries({queryKey:['comments',postId]});
