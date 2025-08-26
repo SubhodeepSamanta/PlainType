@@ -12,7 +12,7 @@
   </p>
 
   <p>
-    <a href="https://plain-type.vercel.app" target="_blank">🚀 Live Demo</a> •
+    <a href="https://plaintype.vercel.app" target="_blank">🚀 Live Demo</a> •
     <a href="#features">✨ Features</a> •
     <a href="#screenshots">📸 Screenshots</a> •
     <a href="#installation">⚡ Installation</a> •
@@ -66,16 +66,19 @@
 <div align="center">
 
 ### 🏠 Homepage
-<img src="./Screenshots/homepage.png" alt="PlainType Homepage" width="800" />
+<img src="./Screenshots/Homepage.png" alt="PlainType Homepage" width="800" />
 
 ### ✍️ Create Post
-<img src="./Screenshots/create-post.png" alt="Create Post Interface" width="800" />
+<img src="./Screenshots/Createpage.png" alt="Create Post Interface" width="800" />
 
 ### 📖 Post View
-<img src="./Screenshots/post-view.png" alt="Post Reading Interface" width="800" />
+<img src="./Screenshots/Postpage.png" alt="Post Reading Interface" width="800" />
 
-### 📱 Mobile View
-<img src="./Screenshots/mobile-view.png" alt="Mobile Responsive Design" width="400" />
+### 📱 Search View
+<img src="./Screenshots/Searchpage.png" alt="Search Page Design" width="800" />
+
+### 📱 Comments View
+<img src="./Screenshots/Comments.png" alt="Search Page Design" width="800" />
 
 </div>
 
