@@ -1,6 +1,6 @@
 <div align="center">
-<img src="./Frontend/public/logo.png" alt="PlainType Logo" width="80" height="80" />
-  <h1>🌟 PlainType</h1>
+  <img src="./Frontend/public/logo.png" alt="PlainType Logo" width="80" height="80" />
+  <h1>PlainType</h1>
   <p><strong>A Modern Full-Stack Blogging Platform</strong></p>
   
   <p>
@@ -12,8 +12,9 @@
   </p>
 
   <p>
-    <a href="https://plain-type.vercel.app">🚀 Live Demo</a> •
+    <a href="https://plain-type.vercel.app" target="_blank">🚀 Live Demo</a> •
     <a href="#features">✨ Features</a> •
+    <a href="#screenshots">📸 Screenshots</a> •
     <a href="#installation">⚡ Installation</a> •
     <a href="#contributing">🤝 Contributing</a>
   </p>
@@ -60,7 +61,33 @@
 
 ---
 
+## 📸 Screenshots
+
+<div align="center">
+
+### 🏠 Homepage
+<img src="./Screenshots/homepage.png" alt="PlainType Homepage" width="800" />
+
+### ✍️ Create Post
+<img src="./Screenshots/create-post.png" alt="Create Post Interface" width="800" />
+
+### 📖 Post View
+<img src="./Screenshots/post-view.png" alt="Post Reading Interface" width="800" />
+
+### 📱 Mobile View
+<img src="./Screenshots/mobile-view.png" alt="Mobile Responsive Design" width="400" />
+
+</div>
+
+---
+
 ## 🛠️ Tech Stack
+
+<div align="center">
+
+<table>
+<tr>
+<td width="50%">
 
 ### Frontend
 | Technology | Purpose |
@@ -74,6 +101,9 @@
 | **Clerk** | Authentication |
 | **ImageKit** | Image Management |
 
+</td>
+<td width="50%">
+
 ### Backend
 | Technology | Purpose |
 |------------|---------|
@@ -84,6 +114,13 @@
 | **Clerk Express** | Authentication |
 | **ImageKit** | Image Processing |
 | **CORS** | Cross-Origin Requests |
+| **Dotenv** | Environment Variables |
+
+</td>
+</tr>
+</table>
+
+</div>
 
 ---
 
@@ -159,6 +196,7 @@ PlainType/
 │   │   ├── utils/           # Utility functions
 │   │   └── styles/          # CSS and styling
 │   ├── public/              # Static assets
+│   │   └── logo.png         # PlainType logo
 │   └── package.json         # Frontend dependencies
 │
 ├── Backend/                 # Express.js backend API
@@ -168,6 +206,12 @@ PlainType/
 │   ├── controllers/         # Route controllers
 │   ├── utils/               # Backend utilities
 │   └── package.json         # Backend dependencies
+│
+├── Screenshots/             # Application screenshots
+│   ├── homepage.png         # Homepage screenshot
+│   ├── create-post.png      # Create post interface
+│   ├── post-view.png        # Post reading interface
+│   └── mobile-view.png      # Mobile responsive design
 │
 └── README.md               # Project documentation
 ```
@@ -260,6 +304,7 @@ This project is licensed under the **ISC License**. See the [LICENSE](LICENSE) f
 ---
 
 <div align="center">
+  <img src="./Frontend/public/logo.png" alt="PlainType" width="32" height="32" />
   <p>Made with ❤️ by <a href="https://github.com/SubhodeepSamanta">Subhodeep Samanta</a></p>
   <p>⭐ Star this repo if you find it helpful!</p>
 </div>
